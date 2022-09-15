@@ -1,0 +1,132 @@
+service: demo-serverless
+org: bijaksherry
+frameworkVersion: ^3.22.0
+
+custom:
+  serverlessPluginTypescript:
+    tsConfigFileLocation: './tsconfig.json'
+  # serverless-offline:
+  #   httpPort: 4000
+  #   websocketPort: 4001
+  #   lambdaPort: 4002
+
+provider:
+  name: aws
+  runtime : nodejs12.x
+  versionFunctions: false
+  memorySize: 512
+  timeout: 30
+  stage: dev
+  region: 'ap-south-1'
+  logs:
+    restApi: true
+
+functions:
+  getUsers:
+    handler: ./src/handler.getUsers
+    events:
+      - http:
+          method: get
+          path: users
+          cors:
+            origin: '*' # <-- Specify allowed origin
+            headers: # <-- Specify allowed headers
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+
+  # postUsers:
+    # handler: ./src/handler.postUsers
+    # events:
+    #   - http:
+    #       method: post
+    #       path: postUser
+    #       cors:
+    #         origin: '*' # <-- Specify allowed origin
+    #         headers: # <-- Specify allowed headers
+    #           - Content-Type
+    #           - X-Amz-Date
+    #           - Authorization
+    #           - X-Api-Key
+    #           - X-Amz-Security-Token
+    #           - X-Amz-User-Agent
+    #         allowCredentials: false 
+
+  postUserResp:
+    handler: ./src/handler.postUserResp
+    events:
+      - http:
+          method: post
+          path: postUser
+          cors:
+            origin: '*' # <-- Specify allowed origin
+            headers: # <-- Specify allowed headers
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+      
+  deleteUserResp:
+    handler: ./src/handler.deleteUserResp
+    events:
+      - http:
+          method: delete
+          path: deleteUser
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+  
+  updateUser:
+      handler: ./src/handler.updateUser
+      events:
+        - http:
+            method: put
+            path: updateUser
+            cors:
+              origin: '*' # <-- Specify allowed origin
+              headers: # <-- Specify allowed headers
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+              allowCredentials: false
+
+  getUserViaId:
+      handler: ./src/handler.getUserViaId
+      events:
+        - http:
+            method: get
+            path: getuserbyid
+            cors:
+              origin: '*' # <-- Specify allowed origin
+              headers: # <-- Specify allowed headers
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+              allowCredentials: false
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
+  
+
+
