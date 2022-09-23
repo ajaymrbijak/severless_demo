@@ -18,6 +18,7 @@ class User extends Model{
 Id:number
 @Column({
     type:DataType.STRING,
+    // allowNull:false
     // field:AppColumns.First_Name
 })
 First_Name:string

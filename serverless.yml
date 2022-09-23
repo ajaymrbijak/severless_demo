@@ -5,6 +5,8 @@ frameworkVersion: ^3.22.0
 custom:
   serverlessPluginTypescript:
     tsConfigFileLocation: './tsconfig.json'
+  serverless-offline:
+    noPrependStageInUrl: true
   # serverless-offline:
   #   httpPort: 4000
   #   websocketPort: 4001
@@ -38,23 +40,6 @@ functions:
               - X-Amz-Security-Token
               - X-Amz-User-Agent
             allowCredentials: false
-
-  # postUsers:
-    # handler: ./src/handler.postUsers
-    # events:
-    #   - http:
-    #       method: post
-    #       path: postUser
-    #       cors:
-    #         origin: '*' # <-- Specify allowed origin
-    #         headers: # <-- Specify allowed headers
-    #           - Content-Type
-    #           - X-Amz-Date
-    #           - Authorization
-    #           - X-Api-Key
-    #           - X-Amz-Security-Token
-    #           - X-Amz-User-Agent
-    #         allowCredentials: false 
 
   postUserResp:
     handler: ./src/handler.postUserResp

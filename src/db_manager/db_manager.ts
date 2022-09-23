@@ -1,9 +1,8 @@
 
 import { ModelCtor, Sequelize } from 'sequelize-typescript'
-import DBPost from '../db_operation/post'
 class DBManager{
 
-async createDBConnection(model:any){
+async createDBConnection(model1:ModelCtor[]){
     
 try{
     let dbConfig={
@@ -22,7 +21,7 @@ try{
   username: dbConfig.username,
   password: dbConfig.password,
   storage: ':memory:',
-  models: model 
+  models: model1
 });
 //  saveDB(sequelize)
 await sequelize.authenticate()
@@ -30,6 +29,7 @@ console.log("The DataBase Connection done successfull")
 }
 
 catch(e){
+    console.log(e.toString())
     console.log("Unable to connect with the database")
 }
     }
