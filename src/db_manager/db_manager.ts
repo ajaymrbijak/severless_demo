@@ -6,10 +6,15 @@ async createDBConnection(model1:ModelCtor[]){
     
 try{
     let dbConfig={
-        "databasename":"product",
+        // "databasename":"product",
+        // "username":"postgres",
+        // "password":"1234",
+        // "host":"localhost",
+        // "port":5432,
+         "databasename":"jiomart_db",
         "username":"postgres",
-        "password":"1234",
-        "host":"localhost",
+        "password":"12345678",
+        "host":"jiomartdb.cxufopfx4q8i.ap-south-1.rds.amazonaws.com",
         "port":5432,
 
     }

@@ -1,7 +1,7 @@
 
 
 import { Column, DataType, Model, Table } from "sequelize-typescript";
-// import AppColumns from "./app_columns";
+
 
 @Table({
     "tableName":"customers",
@@ -15,28 +15,28 @@ class User extends Model{
      autoIncrement:true,
     //  field:AppColumns.Id
 })
-Id:number
+id:number
 @Column({
     type:DataType.STRING,
     // allowNull:false
     // field:AppColumns.First_Name
 })
-First_Name:string
+firstname:string
 @Column({
     type:DataType.STRING,
     // field:AppColumns.Last_Name
 })
-Last_Name:string
+lastname:string
 @Column({
     type:DataType.STRING,
     // field:AppColumns.Email
 })
-Email:string
+email:string
 @Column({
     type:DataType.INTEGER,
     // field:AppColumns.Mobile_Number
 })
-Mobile_Number:number
+phone:number
 
 }
 export default User

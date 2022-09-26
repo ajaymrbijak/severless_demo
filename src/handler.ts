@@ -1,10 +1,7 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { Response } from "aws-sdk";
 import DBManager from "./db_manager/db_manager";
-import Responses from "./db_manager/response_connection";
 import User from "./model/app";
-import UserPost from "./model/user_post";
-
+// import { APIGatewayProxyEvent } from '/Users/bindureddykr/Desktop/Aws_Serverless_Demo_Code/nodejs/node_modules/@types/aws-lambda/index';
 export async function getUsers(event: APIGatewayProxyEvent) {
   let dbManager = new DBManager();
   await dbManager.createDBConnection([User]);
@@ -14,11 +11,11 @@ export async function getUsers(event: APIGatewayProxyEvent) {
 
   for (let i = 0; i < userInfo.length; i++) {
     let obj = {
-      id: userInfo[i].Id,
-      first_name: userInfo[i].First_Name,
-      last_name: userInfo[i].Last_Name,
-      email: userInfo[i].Email,
-      mobile_number: userInfo[i].Mobile_Number,
+      id: userInfo[i].id,
+      first_name: userInfo[i].firstname,
+      last_name: userInfo[i].lastname,
+      email: userInfo[i].email,
+      mobile_number: userInfo[i].phone,
     };
     resp.push(obj);
   }
@@ -64,10 +61,10 @@ export async function postUserResp(event: APIGatewayProxyEvent) {
     }
    
     const data = {
-      First_Name: body["First_Name"],
-      Last_Name: body["Last_Name"],
-      Email: body["Email"],
-      Mobile_Number: body["Mobile_Number"],
+      firstname: body["firstname"],
+      lastname: body["lastname"],
+      email: body["email"],
+      phone: body["phone"],
     };
    console.log(data.toString())
     const post = await User.create(data);
@@ -119,32 +116,10 @@ export async function deleteUserResp(event: APIGatewayProxyEvent) {
         },
       )};
     }
-// let bodydata=event.body
-// if(bodydata==null){
-//   return console.log("Delete  Id Must to be passed")
-// }
-    let deletepost= event.queryStringParameters;
-    if (typeof event.body === "string") {
-      deletepost = JSON.parse(event.body);
-     console.log(deletepost);
-    }
-   if(deletepost==null)
-   {
-return{
-  "statusCode":404,
-  "body":{
-    "data":"",
-    "error":"Delete iD must to be pass"}
-}
-   }
-    const data = {
-            Id:deletepost['Id']
-    };
-
-    let deletePost = await User.destroy({
-      where: { data },
+    const  deletePost = await User.destroy({
+      where: { id: event.queryStringParameters.id },
     });
-    // console.log(deletePost);
+    console.log(deletePost);
     const response = {
       statusCode: 200,
       headers: {
@@ -165,7 +140,7 @@ return{
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
       },
-      body: JSON.stringify({ msg: "Internal Server Error", data: "" }),
+      body: JSON.stringify({ msg: "Internal Server Error Occured", data: "" }),
     };
     return response;
   }
@@ -177,7 +152,7 @@ export async function updateUser(event: APIGatewayProxyEvent) {
     await db_manager.createDBConnection([User]);
     if (
       event.multiValueQueryStringParameters== null ||
-      event.multiValueQueryStringParameters.Id == null 
+      event.multiValueQueryStringParameters.id == null 
     ) {
       return {
         statusCode: 400,
@@ -193,12 +168,12 @@ export async function updateUser(event: APIGatewayProxyEvent) {
     }
     let updatePost= await User.update(
       {
-        First_Name: `${event.multiValueQueryStringParameters.First_Name}`,
-        Last_Name: `${event.multiValueQueryStringParameters.Last_Name}`,
-        Email: `${event.multiValueQueryStringParameters.Email}`,
-        Mobile_Number: event.multiValueQueryStringParameters.Mobile_Number,
+        firstname: `${event.multiValueQueryStringParameters.firstname}`,
+        lastname: `${event.multiValueQueryStringParameters.lastname}`,
+        email: `${event.multiValueQueryStringParameters.email}`,
+        phone: event.multiValueQueryStringParameters.phone,
       },
-      { where: { Id: event.multiValueQueryStringParameters.Id } }
+      { where: { id: event.multiValueQueryStringParameters.id } }
     );
     console.log(updatePost)
     if (updatePost == null) {
@@ -258,11 +233,11 @@ export async function getUserViaId(event: APIGatewayProxyEvent) {
     let posts = await User.findOne({
       raw: true,
       where: {
-        Id: event.queryStringParameters.Id,
+        id: event.queryStringParameters.id,
       },
     });
 
-    console.log(JSON.stringify(event.queryStringParameters.Id));
+    console.log(JSON.stringify(event.queryStringParameters.id));
     const response = {
       statusCode: 200,
       headers: {
