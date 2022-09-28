@@ -202,7 +202,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/demo-serverless/dev/1664172344075-2022-09-26T06:05:44.075Z/demo-serverless.zip"
+                "S3Key": "serverless/demo-serverless/dev/1664282013124-2022-09-27T12:33:33.124Z/getUsers.zip"
               },
               "Handler": "./src/handler.getUsers",
               "Runtime": "nodejs12.x",
@@ -214,7 +214,10 @@
                   "IamRoleLambdaExecution",
                   "Arn"
                 ]
-              }
+              },
+              "Layers": [
+                "arn:aws:lambda:ap-south-1:576875047862:layer:demo_serverless_layer:1"
+              ]
             },
             "DependsOn": [
               "GetUsersLogGroup"
@@ -227,7 +230,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/demo-serverless/dev/1664172344075-2022-09-26T06:05:44.075Z/demo-serverless.zip"
+                "S3Key": "serverless/demo-serverless/dev/1664282013124-2022-09-27T12:33:33.124Z/postUserResp.zip"
               },
               "Handler": "./src/handler.postUserResp",
               "Runtime": "nodejs12.x",
@@ -239,7 +242,10 @@
                   "IamRoleLambdaExecution",
                   "Arn"
                 ]
-              }
+              },
+              "Layers": [
+                "arn:aws:lambda:ap-south-1:576875047862:layer:demo_serverless_layer:1"
+              ]
             },
             "DependsOn": [
               "PostUserRespLogGroup"
@@ -252,7 +258,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/demo-serverless/dev/1664172344075-2022-09-26T06:05:44.075Z/demo-serverless.zip"
+                "S3Key": "serverless/demo-serverless/dev/1664282013124-2022-09-27T12:33:33.124Z/deleteUserResp.zip"
               },
               "Handler": "./src/handler.deleteUserResp",
               "Runtime": "nodejs12.x",
@@ -264,7 +270,10 @@
                   "IamRoleLambdaExecution",
                   "Arn"
                 ]
-              }
+              },
+              "Layers": [
+                "arn:aws:lambda:ap-south-1:576875047862:layer:demo_serverless_layer:1"
+              ]
             },
             "DependsOn": [
               "DeleteUserRespLogGroup"
@@ -277,7 +286,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/demo-serverless/dev/1664172344075-2022-09-26T06:05:44.075Z/demo-serverless.zip"
+                "S3Key": "serverless/demo-serverless/dev/1664282013124-2022-09-27T12:33:33.124Z/updateUser.zip"
               },
               "Handler": "./src/handler.updateUser",
               "Runtime": "nodejs12.x",
@@ -289,7 +298,10 @@
                   "IamRoleLambdaExecution",
                   "Arn"
                 ]
-              }
+              },
+              "Layers": [
+                "arn:aws:lambda:ap-south-1:576875047862:layer:demo_serverless_layer:1"
+              ]
             },
             "DependsOn": [
               "UpdateUserLogGroup"
@@ -302,7 +314,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/demo-serverless/dev/1664172344075-2022-09-26T06:05:44.075Z/demo-serverless.zip"
+                "S3Key": "serverless/demo-serverless/dev/1664282013124-2022-09-27T12:33:33.124Z/getUserViaId.zip"
               },
               "Handler": "./src/handler.getUserViaId",
               "Runtime": "nodejs12.x",
@@ -314,7 +326,10 @@
                   "IamRoleLambdaExecution",
                   "Arn"
                 ]
-              }
+              },
+              "Layers": [
+                "arn:aws:lambda:ap-south-1:576875047862:layer:demo_serverless_layer:1"
+              ]
             },
             "DependsOn": [
               "GetUserViaIdLogGroup"
@@ -862,7 +877,7 @@
               "GetUserViaIdLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1664172226635": {
+          "ApiGatewayDeployment1664281897797": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1177,7 +1192,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/demo-serverless/dev/1664172344075-2022-09-26T06:05:44.075Z/custom-resources.zip"
+                "S3Key": "serverless/demo-serverless/dev/1664282013124-2022-09-27T12:33:33.124Z/custom-resources.zip"
               },
               "FunctionName": "demo-serverless-dev-custom-resource-apigw-cw-role",
               "Handler": "api-gateway-cloud-watch-role/handler.handler",
@@ -1358,13 +1373,17 @@
             }
           }
         ],
+        "layers": {
+          "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetUsersLambdaFunction\"][\"Properties\"][\"Layers\"]"
+        },
         "name": "demo-serverless-dev-getUsers",
         "package": {
           "exclude": [
             "node_modules/serverless-plugin-typescript"
           ],
           "include": [],
-          "patterns": []
+          "patterns": [],
+          "artifact": "/Users/bindureddykr/Desktop/Aws_Serverless_Demo_Code/.serverless/getUsers.zip"
         },
         "memory": 512,
         "timeout": 30,
@@ -1398,13 +1417,17 @@
             }
           }
         ],
+        "layers": {
+          "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"PostUserRespLambdaFunction\"][\"Properties\"][\"Layers\"]"
+        },
         "name": "demo-serverless-dev-postUserResp",
         "package": {
           "exclude": [
             "node_modules/serverless-plugin-typescript"
           ],
           "include": [],
-          "patterns": []
+          "patterns": [],
+          "artifact": "/Users/bindureddykr/Desktop/Aws_Serverless_Demo_Code/.serverless/postUserResp.zip"
         },
         "memory": 512,
         "timeout": 30,
@@ -1438,13 +1461,17 @@
             }
           }
         ],
+        "layers": {
+          "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteUserRespLambdaFunction\"][\"Properties\"][\"Layers\"]"
+        },
         "name": "demo-serverless-dev-deleteUserResp",
         "package": {
           "exclude": [
             "node_modules/serverless-plugin-typescript"
           ],
           "include": [],
-          "patterns": []
+          "patterns": [],
+          "artifact": "/Users/bindureddykr/Desktop/Aws_Serverless_Demo_Code/.serverless/deleteUserResp.zip"
         },
         "memory": 512,
         "timeout": 30,
@@ -1478,13 +1505,17 @@
             }
           }
         ],
+        "layers": {
+          "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"UpdateUserLambdaFunction\"][\"Properties\"][\"Layers\"]"
+        },
         "name": "demo-serverless-dev-updateUser",
         "package": {
           "exclude": [
             "node_modules/serverless-plugin-typescript"
           ],
           "include": [],
-          "patterns": []
+          "patterns": [],
+          "artifact": "/Users/bindureddykr/Desktop/Aws_Serverless_Demo_Code/.serverless/updateUser.zip"
         },
         "memory": 512,
         "timeout": 30,
@@ -1518,13 +1549,17 @@
             }
           }
         ],
+        "layers": {
+          "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetUserViaIdLambdaFunction\"][\"Properties\"][\"Layers\"]"
+        },
         "name": "demo-serverless-dev-getUserViaId",
         "package": {
           "exclude": [
             "node_modules/serverless-plugin-typescript"
           ],
           "include": [],
-          "patterns": []
+          "patterns": [],
+          "artifact": "/Users/bindureddykr/Desktop/Aws_Serverless_Demo_Code/.serverless/getUserViaId.zip"
         },
         "memory": 512,
         "timeout": 30,
@@ -1549,16 +1584,25 @@
       },
       "plugins": {
         "$ref": "$[\"service\"][\"plugins\"]"
+      },
+      "package": {
+        "individually": true,
+        "excludeDevDependencies": true,
+        "exclude": [
+          "node_modules/**"
+        ],
+        "artifactsS3KeyDirname": "serverless/demo-serverless/dev/code-artifacts",
+        "artifactDirectoryName": "serverless/demo-serverless/dev/1664282013124-2022-09-27T12:33:33.124Z"
       }
     },
     "org": "bijaksherry",
     "layers": {},
     "isDashboardMonitoringPreconfigured": true,
-    "isDashboardAppPreconfigured": false,
-    "artifact": "/Users/bindureddykr/Desktop/Aws_Serverless_Demo_Code/.build/.serverless/demo-serverless.zip"
+    "isDashboardAppPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/demo-serverless/dev/1664172344075-2022-09-26T06:05:44.075Z",
-    "artifact": "demo-serverless.zip"
+    "individually": true,
+    "artifactDirectoryName": "serverless/demo-serverless/dev/1664282013124-2022-09-27T12:33:33.124Z",
+    "artifact": ""
   }
 }

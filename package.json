@@ -6,22 +6,31 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajaymrbijak/severless_demo.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajaymrbijak/severless_demo/issues"
+  },
+  "homepage": "https://github.com/ajaymrbijak/severless_demo#readme",
   "devDependencies": {
-    "@types/node": "^18.7.17",
+    "@types/node": "^18.7.23",
     "@types/pg": "^8.6.5",
-    "@types/validator": "^13.7.6",
+    "@types/validator": "^13.7.7",
     "serverless": "^3.22.0",
-    "serverless-offline": "^10.0.2",
+    "serverless-offline": "^10.3.0",
     "serverless-plugin-typescript": "^2.1.2",
     "typescript": "^4.8.3"
   },
   "dependencies": {
-    "@types/aws-lambda": "^8.10.103",
+    "@types/aws-lambda": "^8.10.106",
+    "axios": "^0.27.2",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.21.6",
+    "sequelize": "^6.23.1",
     "sequelize-typescript": "^2.1.3"
   }
 }
